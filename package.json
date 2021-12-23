@@ -1,0 +1,19 @@
+{
+  "name": "mf-forms",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "install:dev": "concurrently \"wsrun --parallel install:dev\"",
+    "start:dev": "concurrently \"wsrun --parallel start:dev\""
+  },
+  "workspaces": [
+    "projects/*"
+  ],
+  "devDependencies": {
+    "concurrently": "^6.5.1",
+    "wsrun": "^5.2.4"
+  }
+}

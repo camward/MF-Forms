@@ -7,6 +7,7 @@
   "license": "ISC",
   "homepage": ".",
   "scripts": {
+    "install:dev": "npm install",
     "serve": "cross-env NODE_ENV=development webpack serve",
     "start": "cross-env REACT_APP_PUBLIC_URL=/ REACT_APP_SITE_URL=/ REACT_APP_API_URL=/api/v1 npm run serve",
     "start:dev": "cross-env REACT_APP_USE_MOCKS=true npm run start",
