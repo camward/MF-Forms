@@ -1,6 +1,8 @@
-import React from 'react';
-import Button from 'remoteComponents/Button';
-import Input from 'remoteComponents/Input';
+import React, { lazy, Suspense } from 'react';
+import ErrorBoundary from '../common/ErrorBoundary';
+
+const Button = lazy(() => import('remoteComponents/Button'));
+const Input = lazy(() => import('remoteComponents/Input'));
 
 const Form = () => {
   const onSubmit = (e: any) => {
@@ -10,11 +12,15 @@ const Form = () => {
   return (
     <>
       <h1>Форма</h1>
-      <p>Форма из компонентов Remote Module App</p>
-      <form onSubmit={onSubmit}>
-        <Input label="Адрес" placeholder="Введите значение" />
-        <Button label="Сохранить" type="submit" />
-      </form>
+      <ErrorBoundary message="Форма временно недоступна">
+        <Suspense fallback="Загрузка...">
+          <p>Форма из компонентов Remote Module App</p>
+          <form onSubmit={onSubmit}>
+            <Input label="Адрес" placeholder="Введите значение" />
+            <Button label="Сохранить" type="submit" />
+          </form>
+        </Suspense>
+      </ErrorBoundary>
     </>
   );
 };
