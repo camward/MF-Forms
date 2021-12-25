@@ -1,7 +1,6 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-import configureStore from './store';
 import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
+import StoreWrapper from './components/common/StoreWrapper';
 import Loader from './components/common/Loader';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
@@ -15,10 +14,8 @@ import './assets/style/app.scss';
 
 getDebugInfo();
 
-const store = configureStore();
-
 const App = () => (
-  <Provider store={store}>
+  <StoreWrapper hasStore>
     <BrowserRouter basename={process.env.REACT_APP_PUBLIC_URL}>
       <Loader />
       <div className="app-container">
@@ -35,7 +32,7 @@ const App = () => (
       </div>
       <Footer />
     </BrowserRouter>
-  </Provider>
+  </StoreWrapper>
 );
 
 export default App;

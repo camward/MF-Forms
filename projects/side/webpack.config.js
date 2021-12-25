@@ -146,6 +146,7 @@ const config = {
       exposes: {
         './Button': './src/components/common/Button',
         './Input': './src/components/common/Input',
+        './TaskList': './src/components/Task/List',
       },
       shared: {
         ...deps,
