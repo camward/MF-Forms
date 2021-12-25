@@ -1,0 +1,15 @@
+@import 'src/assets/style/variables';
+
+.button {
+  margin: 15px 10px 10px;
+
+  button {
+    background-color: $base-blue;
+    color: $background-white;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+}

@@ -20,8 +20,8 @@ const Header = () => {
       label: 'Задачи',
     },
     {
-      link: '/statistics',
-      label: 'Статистика',
+      link: '/form',
+      label: 'Форма',
     },
   ];
 

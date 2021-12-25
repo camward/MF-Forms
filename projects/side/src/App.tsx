@@ -7,7 +7,7 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import PageContent from './components/layout/PageContent';
 import Home from './components/Home';
-import Statistics from './components/Statistics';
+import Form from './components/Form';
 import TaskList from './components/Task/List';
 import TaskDetail from './components/Task/Detail';
 import { getDebugInfo } from './utils/debug';
@@ -28,7 +28,7 @@ const App = () => (
             <Route path="/" exact component={Home} />
             <Route path="/task" exact component={TaskList} />
             <Route path="/task/:id" exact component={TaskDetail} />
-            <Route path="/statistics" exact component={Statistics} />
+            <Route path="/form" exact component={Form} />
             <Redirect to="/" />
           </Switch>
         </PageContent>
