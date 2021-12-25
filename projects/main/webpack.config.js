@@ -9,6 +9,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin;
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
+const { ModuleFederationPlugin } = require('webpack').container;
 
 const isBundleAnalyser = process.env.BUNDLE_ANALYSER;
 const isDevMode = process.env.NODE_ENV === 'development';
@@ -135,6 +136,11 @@ const config = {
     new HTMLWebpackPlugin({
       template: './public/index.html',
       favicon: './public/favicon.ico',
+    }),
+    new ModuleFederationPlugin({
+      remotes: {
+        remoteComponents: 'remoteComponents@http://127.0.0.1:3002/remoteEntry.js',
+      },
     }),
     new NodePolyfillPlugin(),
     new CleanWebpackPlugin(),

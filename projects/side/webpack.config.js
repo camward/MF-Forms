@@ -9,6 +9,9 @@ const CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin;
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
+const { ModuleFederationPlugin } = require('webpack').container;
+
+const deps = require('./package.json').dependencies;
 
 const isBundleAnalyser = process.env.BUNDLE_ANALYSER;
 const isDevMode = process.env.NODE_ENV === 'development';
@@ -44,7 +47,7 @@ const config = {
   entry: ['core-js/stable', './src/index.tsx'],
   output: {
     path: path.resolve(__dirname, 'build'),
-    publicPath: process.env.REACT_APP_SITE_URL || process.env.REACT_APP_PUBLIC_URL,
+    publicPath: 'auto',
     filename: 'bundle-[fullhash].js',
     globalObject: 'this',
   },
@@ -135,6 +138,33 @@ const config = {
     new HTMLWebpackPlugin({
       template: './public/index.html',
       favicon: './public/favicon.ico',
+    }),
+    new ModuleFederationPlugin({
+      name: 'remoteComponents',
+      library: { type: 'var', name: 'remoteComponents' },
+      filename: 'remoteEntry.js',
+      exposes: {
+        './Button': './src/components/common/Button',
+        './Input': './src/components/common/Input',
+      },
+      shared: {
+        ...deps,
+        react: {
+          eager: true,
+          singleton: true,
+          requiredVersion: deps.react,
+        },
+        'react-dom': {
+          eager: true,
+          singleton: true,
+          requiredVersion: deps['react-dom'],
+        },
+        'react-router-dom': {
+          eager: true,
+          singleton: true,
+          requiredVersion: deps['react-router-dom'],
+        },
+      },
     }),
     new NodePolyfillPlugin(),
     new CleanWebpackPlugin(),
