@@ -7,9 +7,10 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import PageContent from './components/layout/PageContent';
 import Home from './components/Home';
-import Statistics from './components/Statistics';
-import TaskList from './components/Task/List';
-import TaskDetail from './components/Task/Detail';
+import Task from './components/Task';
+import Form from './components/Form';
+import Formik from './components/Formik';
+import RHF from './components/RHF';
 import { getDebugInfo } from './utils/debug';
 import './assets/style/app.scss';
 
@@ -23,12 +24,13 @@ const App = () => (
       <Loader />
       <div className="app-container">
         <Header />
-        <PageContent bgExclusionList={['task']}>
+        <PageContent>
           <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/task" exact component={TaskList} />
-            <Route path="/task/:id" exact component={TaskDetail} />
-            <Route path="/statistics" exact component={Statistics} />
+            <Route path="/task" exact component={Task} />
+            <Route path="/form" exact component={Form} />
+            <Route path="/formik" exact component={Formik} />
+            <Route path="/rhf" exact component={RHF} />
             <Redirect to="/" />
           </Switch>
         </PageContent>
