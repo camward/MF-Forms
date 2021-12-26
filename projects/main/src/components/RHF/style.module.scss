@@ -1,0 +1,30 @@
+@import 'src/assets/style/variables';
+
+.task {
+  display: flex;
+  justify-content: space-between;
+
+  &_form,
+  &_list {
+    border-radius: 8px;
+    border: 1px solid $template-border;
+    box-sizing: border-box;
+    padding: 15px;
+    width: 49%;
+  }
+
+  &_form {
+    &_link {
+      display: flex;
+      margin-bottom: 15px;
+
+      & > div {
+        margin-bottom: 0;
+      }
+
+      button {
+        margin-left: 10px;
+      }
+    }
+  }
+}

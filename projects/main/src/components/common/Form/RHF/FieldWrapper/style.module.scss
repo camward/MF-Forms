@@ -1,0 +1,11 @@
+@import 'src/assets/style/variables';
+
+.field {
+  display: block;
+  margin-bottom: 15px;
+
+  &_error {
+    color: $status-red;
+    margin-top: 5px;
+  }
+}

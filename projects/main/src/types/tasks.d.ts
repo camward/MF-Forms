@@ -5,4 +5,13 @@ declare module 'Models' {
     links: string[];
     comment: string;
   }
+
+  export interface ActiveTaskProps {
+    name: string;
+    email: string;
+    links: {
+      link: string;
+    }[];
+    confirm: boolean;
+  }
 }
