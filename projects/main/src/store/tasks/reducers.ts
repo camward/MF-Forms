@@ -1,34 +1,15 @@
 import { combineReducers } from 'redux';
-import { TaskListItemProps, TaskDetailProps } from 'Models';
+import { CurrentTaskProps } from 'Models';
 import { createReducer } from 'typesafe-actions';
-import { fetchTaskList, fetchTaskDetail } from './actions';
+import { setCurrentTask } from './actions';
 
-export const tasksList = createReducer([] as TaskListItemProps[]).handleAction(
-  [fetchTaskList.success],
-  (state, action) => action.payload.tasks,
-);
-
-export const tasksDetail = createReducer({} as TaskDetailProps | null).handleAction(
-  [fetchTaskDetail.success],
+export const currentTask = createReducer({} as CurrentTaskProps | null).handleAction(
+  setCurrentTask,
   (state, action) => action.payload,
 );
 
-export const tasksDataUploaded = createReducer(false as boolean)
-  .handleAction(
-    [
-      fetchTaskList.success,
-      fetchTaskList.failure,
-      fetchTaskDetail.success,
-      fetchTaskDetail.failure,
-    ],
-    () => true,
-  )
-  .handleAction([fetchTaskList.request, fetchTaskDetail.request], () => false);
-
 const tasksReducer = combineReducers({
-  list: tasksList,
-  detail: tasksDetail,
-  dataUploaded: tasksDataUploaded,
+  current: currentTask,
 });
 
 export default tasksReducer;

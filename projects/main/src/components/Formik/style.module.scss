@@ -1,0 +1,28 @@
+@import 'src/assets/style/variables';
+
+.task {
+  display: flex;
+  justify-content: space-between;
+
+  &_form,
+  &_list {
+    border-radius: 8px;
+    border: 1px solid $template-border;
+    padding: 15px;
+    width: 49%;
+  }
+
+  &_form {
+    &_field {
+      &_item {
+        display: flex;
+        height: 2.4rem;
+        margin-bottom: 10px;
+
+        button {
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+}
