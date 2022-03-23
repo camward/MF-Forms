@@ -1,8 +1,13 @@
 declare module 'Models' {
+  export interface CurrentCarsProps {
+    name: string;
+    models: string[];
+  }
+
   export interface CurrentTaskProps {
     name: string;
     email: string;
-    links: string[];
+    cars: CurrentCarsProps[];
     comment: string;
   }
 

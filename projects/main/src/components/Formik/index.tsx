@@ -1,9 +1,10 @@
 import React from 'react';
-import { CurrentTaskProps } from 'Models';
+import { CurrentTaskProps, CurrentCarsProps } from 'Models';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik, FieldArray, Form, FormikValues } from 'formik';
 import Input from '../common/Form/Formik/Input';
 import Text from '../common/Form/Formik/Text';
+import Car from './car';
 import { setCurrentTask } from '../../store/tasks/actions';
 import { getCurrentTask } from '../../store/tasks/selectors';
 import { schema as FormSchema } from './validation';
@@ -14,7 +15,8 @@ const TaskForm = () => {
   const dispatch = useDispatch();
   const currentTask = useSelector(getCurrentTask);
 
-  const initialValues = { name: '', email: '', links: [], comment: '' } as FormikValues;
+  const initialValues = { name: '', email: '', cars: [], comment: '' } as FormikValues;
+  const carsObj = { name: '', models: [] } as CurrentCarsProps;
 
   return (
     <div className={s.task}>
@@ -36,28 +38,31 @@ const TaskForm = () => {
                 <Input label="Название" fieldName="name" />
                 <Input label="Email" fieldName="email" />
                 <FieldArray
-                  name="links"
+                  name="cars"
                   render={(arrayHelpers) => (
                     <div>
-                      <div className="form-label">Ссылки</div>
-                      {values.links.map((item: string, index: number) => (
-                        <div key={String(index)} className={s.task_form_field_item}>
-                          <Input label="" fieldName={`links.${index}`} />
-                          <button
-                            type="button"
-                            className="btn btn-danger"
-                            onClick={() => arrayHelpers.remove(index)}
-                          >
-                            Удалить
-                          </button>
+                      <div className="form-label">Автомобили</div>
+                      {values.cars.map((item: string, index: number) => (
+                        <div key={String(index)} className={s.task_form_field}>
+                          <div className={s.task_form_field_item}>
+                            <Input label="" fieldName={`cars.${index}.name`} />
+                            <button
+                              type="button"
+                              className="btn btn-danger"
+                              onClick={() => arrayHelpers.remove(index)}
+                            >
+                              Удалить автомобиль
+                            </button>
+                          </div>
+                          <Car idx={index} />
                         </div>
                       ))}
                       <button
                         type="button"
                         className="btn btn-primary mb-2"
-                        onClick={() => arrayHelpers.push('')}
+                        onClick={() => arrayHelpers.push(carsObj)}
                       >
-                        Добавить ссылку
+                        Добавить автомобиль
                       </button>
                     </div>
                   )}

@@ -16,13 +16,37 @@
     &_field {
       &_item {
         display: flex;
-        height: 2.4rem;
         margin-bottom: 10px;
 
+        & > div {
+          margin-bottom: 0 !important;
+          width: 100%;
+        }
+
         button {
-          margin-left: 5px;
+          margin-left: 10px;
+          white-space: nowrap;
         }
       }
+    }
+  }
+}
+
+.cars {
+  &_list {
+    margin-left: 30px;
+  }
+
+  &_item {
+    display: flex;
+    margin-bottom: 10px;
+
+    & > div {
+      margin-bottom: 0 !important;
+    }
+
+    button {
+      margin-left: 10px;
     }
   }
 }
