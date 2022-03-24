@@ -4,6 +4,7 @@ import { isValid, parse } from 'date-fns';
 
 const errorMessageDate = 'Введите корректную дату';
 const errorMessage = 'Поле обязательно для заполнения';
+const errorMessageBIK = 'Значение должно начинаться с "04" и состоять из 9 цифр';
 
 Yup.addMethod(Yup.string, 'dateCheck', function (message: string) {
   return this.test('Date check', message || errorMessageDate, (value) => {
@@ -23,6 +24,15 @@ Yup.addMethod(Yup.string, 'dateRequired', function (message: string) {
   });
 });
 
+Yup.addMethod(Yup.string, 'isBIK', function (message: string) {
+  return this.test('BIK check', message || errorMessageBIK, (value) => {
+    if (value) {
+      return new RegExp('^04[0-9]{7}$').test(value);
+    }
+    return true;
+  });
+});
+
 declare module 'yup' {
   interface StringSchema<
     TType extends Maybe<string> = string | undefined,
@@ -31,6 +41,7 @@ declare module 'yup' {
   > extends Yup.BaseSchema<TType, TContext, TOut> {
     dateCheck(message?: string): StringSchema<TType, TContext>;
     dateRequired(message?: string): StringSchema<TType, TContext>;
+    isBIK(message?: string): StringSchema<TType, TContext>;
   }
 }
 
