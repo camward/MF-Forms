@@ -31,6 +31,10 @@ const Header = () => {
       link: '/rhf',
       label: 'RHF',
     },
+    {
+      link: '/yup',
+      label: 'Yup',
+    },
   ];
 
   return (

@@ -10,6 +10,7 @@ import Home from './components/Home';
 import Task from './components/Task';
 import Form from './components/Form';
 import Formik from './components/Formik';
+import YupValidator from './components/YupValidator';
 import RHF from './components/RHF';
 import { getDebugInfo } from './utils/debug';
 import './assets/style/app.scss';
@@ -31,6 +32,7 @@ const App = () => (
             <Route path="/form" exact component={Form} />
             <Route path="/formik" exact component={Formik} />
             <Route path="/rhf" exact component={RHF} />
+            <Route path="/yup" exact component={YupValidator} />
             <Redirect to="/" />
           </Switch>
         </PageContent>
