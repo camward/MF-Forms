@@ -11,12 +11,17 @@ declare module 'Models' {
     comment: string;
   }
 
+  export interface ActiveCarsProps {
+    name: string;
+    models: {
+      model: string;
+    }[];
+  }
+
   export interface ActiveTaskProps {
     name: string;
     email: string;
-    links: {
-      link: string;
-    }[];
+    cars: ActiveCarsProps[];
     confirm: boolean;
   }
 }

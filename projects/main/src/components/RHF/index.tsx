@@ -1,11 +1,12 @@
 import React from 'react';
-import { ActiveTaskProps } from 'Models';
+import { ActiveTaskProps, ActiveCarsProps } from 'Models';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm, SubmitHandler, useFieldArray, FormProvider } from 'react-hook-form';
 import { Button } from '@material-ui/core';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Input from '../common/Form/RHF/Input';
 import Checkbox from '../common/Form/RHF/Checkbox';
+import Car from './car';
 import { setActiveTask } from '../../store/tasks/actions';
 import { getActiveTask } from '../../store/tasks/selectors';
 import { schema as FormSchema } from './validation';
@@ -19,16 +20,18 @@ const TaskForm = () => {
     defaultValues: {
       name: '',
       email: '',
-      links: [],
+      cars: [],
       confirm: false,
     },
     resolver: yupResolver(FormSchema),
   });
 
   const { fields, append, remove } = useFieldArray({
-    name: 'links',
+    name: 'cars',
     control: methods.control,
   });
+
+  const carsObj = { name: '', models: [] } as ActiveCarsProps;
 
   const onSubmit: SubmitHandler<ActiveTaskProps> = (data) => {
     dispatch(setActiveTask({ ...data }));
@@ -45,20 +48,23 @@ const TaskForm = () => {
 
             {fields.map((field, index) => {
               return (
-                <div key={field.id} className={s.task_form_link}>
-                  <Input
-                    label={`Ссылка ${index + 1}`}
-                    fieldName={`links.${index}.link`}
-                    isArrayField
-                  />
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    type="button"
-                    onClick={() => remove(index)}
-                  >
-                    Удалить
-                  </Button>
+                <div key={field.id} className={s.task_form_cars}>
+                  <div className={s.task_form_cars_item}>
+                    <Input
+                      label={`Авто ${index + 1}`}
+                      fieldName={`cars.${index}.name`}
+                      isArrayField
+                    />
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      type="button"
+                      onClick={() => remove(index)}
+                    >
+                      Удалить авто
+                    </Button>
+                  </div>
+                  <Car idx={index} />
                 </div>
               );
             })}
@@ -67,9 +73,9 @@ const TaskForm = () => {
               variant="contained"
               color="primary"
               type="button"
-              onClick={() => append({ link: '' })}
+              onClick={() => append(carsObj)}
             >
-              Добавить ссылку
+              Добавить авто
             </Button>
 
             <Checkbox label="Подтверждаю" fieldName="confirm" />
