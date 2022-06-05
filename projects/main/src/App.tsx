@@ -7,7 +7,8 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import PageContent from './components/layout/PageContent';
 import Home from './components/Home';
-import Task from './components/Task';
+import TaskList from './components/Task/list';
+import TaskDetail from './components/Task/detail';
 import Form from './components/Form';
 import Formik from './components/Formik';
 import YupValidator from './components/YupValidator';
@@ -28,7 +29,8 @@ const App = () => (
         <PageContent>
           <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/task" exact component={Task} />
+            <Route path="/task" exact component={TaskList} />
+            <Route path="/task/:id" exact component={TaskDetail} />
             <Route path="/form" exact component={Form} />
             <Route path="/formik" exact component={Formik} />
             <Route path="/rhf" exact component={RHF} />

@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy } from 'react';
 import RemoteAdapter from '../common/RemoteAdapter';
 
 const Button = lazy(() => import('remoteComponents/Button'));

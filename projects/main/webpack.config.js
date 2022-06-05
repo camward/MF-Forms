@@ -9,7 +9,9 @@ const CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin;
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
+
 const { ModuleFederationPlugin } = require('webpack').container;
+const deps = require('./package.json').dependencies;
 
 const isBundleAnalyser = process.env.BUNDLE_ANALYSER;
 const isDevMode = process.env.NODE_ENV === 'development';
@@ -140,6 +142,24 @@ const config = {
     new ModuleFederationPlugin({
       remotes: {
         remoteComponents: 'remoteComponents@http://127.0.0.1:3002/remoteEntry.js',
+      },
+      shared: {
+        ...deps,
+        react: {
+          eager: true,
+          singleton: true,
+          requiredVersion: deps.react,
+        },
+        'react-dom': {
+          eager: true,
+          singleton: true,
+          requiredVersion: deps['react-dom'],
+        },
+        'react-router-dom': {
+          eager: true,
+          singleton: true,
+          requiredVersion: deps['react-router-dom'],
+        },
       },
     }),
     new NodePolyfillPlugin(),

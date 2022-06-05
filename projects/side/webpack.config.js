@@ -9,8 +9,8 @@ const CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin;
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
-const { ModuleFederationPlugin } = require('webpack').container;
 
+const { ModuleFederationPlugin } = require('webpack').container;
 const deps = require('./package.json').dependencies;
 
 const isBundleAnalyser = process.env.BUNDLE_ANALYSER;
@@ -147,6 +147,7 @@ const config = {
         './Button': './src/components/common/Button',
         './Input': './src/components/common/Input',
         './TaskList': './src/components/Task/List',
+        './TaskDetail': './src/components/Task/Detail',
       },
       shared: {
         ...deps,
